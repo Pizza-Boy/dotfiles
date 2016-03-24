@@ -1,0 +1,2 @@
+URxvt.keysym.M-c:	perl.clipboard.copy
+URxvt.keysym.M-v:	perl.clipboard.paste

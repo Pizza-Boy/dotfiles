@@ -1,0 +1,2 @@
+#!/bin/sh
+feh  --image-bg black --bg-center '/home/noah/Desktop/2011_0519_163_520_Lichtenstein.jpg' 

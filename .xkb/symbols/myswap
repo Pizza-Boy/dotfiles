@@ -1,0 +1,4 @@
+partial modifier_keys
+xkb_symbols "swap_caps_shift" {
+    replace key <CAPS>  { [ Shift_L ] };
+};

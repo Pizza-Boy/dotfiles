@@ -1,0 +1,8 @@
+[Desktop Entry]
+Name=Xmodmap
+GenericName=Script for Xmodmap
+Comment=A script that autostarts Xmodmap custom table
+Exec=/usr/bin/xmodmap /home/noah/.Xmodmap
+Terminal=false
+Type=Application
+X-GNOME-Autostart-enabled=true

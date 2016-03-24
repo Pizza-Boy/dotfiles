@@ -1,0 +1,9 @@
+[Added Associations]
+text/plain=mousepad.desktop;
+application/vnd.openxmlformats-officedocument.wordprocessingml.document=libreoffice-writer.desktop;
+application/x-java-archive=zathura-cb.desktop;
+application/zip=zathura-cb.desktop;
+application/x-shellscript=emacs.desktop;
+image/png=imagej.desktop;
+video/x-msvideo=mpv.desktop;
+video/mp4=mpv.desktop;
