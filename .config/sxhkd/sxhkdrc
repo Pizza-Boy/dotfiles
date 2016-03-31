@@ -3,7 +3,7 @@
 #
 
 super + alt + Escape
-	bspc quit && pkill -f test2.sh
+	bspc quit && pkill -f bar-fork2.sh
 
 super + w
 	bspc node -c
@@ -97,20 +97,20 @@ XF86MonBrightnessDown
 	xbacklight -5
 
 XF86AudioRaiseVolume
-	amixer -D pulse set Master 5%+ unmute
+	pactl set-sink-volume 0 +5%
 
 XF86AudioLowerVolume
-	amixer -D pulse set Master 5%- unmute
-
+	pactl set-sink-volume 0 -5%
+	
 XF86AudioMute
-	amixer -D pulse set Master toggle
+	pactl set-sink-mute 0 toggle
 
 #
 # wm independent hotkeys
 #
 
 super + Return
-	urxvt	
+	urxvtc
 
 super + space
 	rofi -show run

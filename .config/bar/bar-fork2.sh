@@ -37,7 +37,7 @@ status() {
 	  memory() {
 		    mem=$(free -m | awk 'NR==2 {print $3}')
 		    mem+="MB"
-		    echo %{F$FG}$glymem%{F$MAG}$mem%{F-}
+		    echo %{F$FG}$glymem$SEP%{F$MAG}$mem%{F-}
 	  }
 	  battery() {
 			  bat=$(cat /sys/class/power_supply/BAT0/capacity)
@@ -55,7 +55,7 @@ status() {
 			  else
 				    glybat=""
 			  fi
-			  echo %{F$FG}$glybat%{F$MAG}$bat$batper$SEP$rem$SEP%{F-t}
+			  echo %{F$FG}$glybat%{F$MAG}$SEP$bat$batper$SEP$rem$SEP%{F-t}
 	  }
 	  #    pkman() {
 	  #        pkr=$(pacman -Qu | wc -l)
@@ -64,18 +64,18 @@ status() {
 	  wireless() {
 			  wl=$(ping -c 1 8.8.8.8 >/dev/null 2>&1 && 
 			           echo ":)" || echo ":(")
-			  echo %{F$FG}$glyint%{F$MAG}$wl$SEP${F-}
+			  echo %{F$FG}$glyint$SEP%{F$MAG}$wl$SEP${F-}
 	  }	
 	  vol() {
-			  mut=$(pamixer --get-mute)
-			  if [ $mut = "true" ]; then
-				    vlm="0"
+			  mut=$(pactl list sinks | grep Mute | awk '{print $2}')
+			  if [ $mut = "yes" ]; then
+				    vlm="0%"
 				    glyvol=""
 			  else
-			      vlm=$(pamixer --get-volume)
+			      vlm=$(pactl list sinks | grep -m 1 Volume | awk '{print $5}')
 			      glyvol=""
 			  fi
-		    echo %{F$FG}$glyvol%{F$MAG}$vlm$SEP${F-}
+		    echo %{F$FG}$glyvol$SEP%{F$MAG}$vlm$SEP${F-}
 	  }
 	  
 	  workspaces() {
@@ -102,24 +102,24 @@ status() {
     		if [[ -z "$check" ]]; then
 			      mus="No Music Playing"
 			      glymus=""
-			      echo %{F$FG}$glymus%{F$MAG}$mus$SEP${F-}
+			      echo %{F$FG}$glymus$SEP%{F$MAG}$mus$SEP${F-}
 		    elif [ "$stat" = "" ]; then
 			      mus="No Music Playing"
 			      glymus=""
-			      echo %{F$FG}$glymus%{F$MAG}$mus${F-}
+			      echo %{F$FG}$glymus$SEP%{F$MAG}$mus${F-}
 		    elif [ ""$stat"" = "paused" ]; then
 			      glymus=""
 			      curr=$(mpc current)
             curr+=" - "
             time=$(mpc -f %artist% | grep 2 | sed 's/^.*(//;s/)$//')
-			      echo %{F$FG}$glymus%{F$MAG}$curr$time${F-}
+			      echo %{F$FG}$glymus$SEP%{F$MAG}$curr$time${F-}
 			      #echo $curr
 		    elif [ "$stat" = "playing" ]; then
 			      glymus=""
 			      curr=$(mpc current)
             curr+=" - "
             time=$(mpc -f %artist% | grep 2 | sed 's/^.*(//;s/)$//')
-			      echo %{F$FG}$glymus%{F$MAG}$curr$time${F-}
+			      echo %{F$FG}$glymus$SEP%{F$MAG}$curr$time${F-}
 			      #echo $curr
 		    fi
 	  }
@@ -142,4 +142,5 @@ while true
 do
 	  echo "$(status)"
 	  sleep 1
-done | lemonbar -g $notifybar_g -d  -u 3 -a 10 -f "Terminus (TTF):size=9" -f "Siji:size=10" -B $BG -F $WHT | sh
+done | lemonbar -g $notifybar_g -u 3 -a 10 -f "-*-terminus-medium-*-normal-*-12-*-*-*-c-*-*-*" -f'-*-tamsyn-medium-r-normal-*-12-*-*-*-*-*-*-1' -f '-wuncon-siji-medium-r-normal--10-100-75-75-c-80-iso10646-1' -B $BG -F $WHT | sh
+

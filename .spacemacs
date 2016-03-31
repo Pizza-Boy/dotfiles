@@ -32,6 +32,8 @@ values."
      themes-megapack
      python
      lua
+     ess/init-ess-R-data-view
+     ess/init-ess-R-object-popup
      ;; sudo-save
      ;; python-mode
      ;; (shell :variables
